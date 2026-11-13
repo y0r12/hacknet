@@ -1,0 +1,76 @@
+# ============================================================
+#  PrisonCore - sell prices
+#  What /sellall and autosell pay for ONE of each item, before multipliers.
+#  Items that are not listed cannot be sold.
+#  In-game: /prison price set <item|hand> <price>, /prison price remove <item|hand>, /prison price list
+#
+#  The defaults are balanced against the default ranks and mine presets: each mine pays about
+#  a third more per block than the one before it. A block made from 9 items is always worth
+#  exactly 9 items, so crafting never creates money.
+# ============================================================
+
+prices:
+  # Mine A-B
+  COBBLESTONE: 4
+  STONE: 4
+  ANDESITE: 5.25
+
+  # Coal
+  COAL: 7
+  COAL_ORE: 7
+  COAL_BLOCK: 63
+
+  # Iron
+  RAW_IRON: 9
+  IRON_INGOT: 9
+  IRON_ORE: 9
+  IRON_BLOCK: 81
+  RAW_IRON_BLOCK: 81
+
+  # Gold
+  RAW_GOLD: 12
+  GOLD_INGOT: 12
+  GOLD_ORE: 12
+  GOLD_BLOCK: 108
+  RAW_GOLD_BLOCK: 108
+
+  # Copper (an ore drops 2-5)
+  RAW_COPPER: 4.5
+  COPPER_INGOT: 4.5
+  COPPER_ORE: 15.75
+  COPPER_BLOCK: 40.5
+  RAW_COPPER_BLOCK: 40.5
+
+  # Redstone (an ore drops 4-5)
+  REDSTONE: 4.6
+  REDSTONE_ORE: 20.7
+  REDSTONE_BLOCK: 41.4
+
+  # Lapis (an ore drops 4-9)
+  LAPIS_LAZULI: 4.2
+  LAPIS_ORE: 27.3
+  LAPIS_BLOCK: 37.8
+
+  # Mid-tier blocks
+  PRISMARINE: 142
+  DARK_PRISMARINE: 187
+  CALCITE: 246
+  AMETHYST_BLOCK: 324
+  BLACKSTONE: 426
+
+  # Diamond, emerald and quartz
+  DIAMOND: 561
+  DIAMOND_ORE: 561
+  EMERALD: 739
+  EMERALD_ORE: 739
+  QUARTZ: 972
+  NETHER_QUARTZ_ORE: 972
+
+  # High-tier blocks
+  NETHER_BRICKS: 1279
+  RED_NETHER_BRICKS: 1684
+  END_STONE: 2216
+  PURPUR_BLOCK: 2917
+  QUARTZ_BLOCK: 3888
+  DIAMOND_BLOCK: 5049
+  EMERALD_BLOCK: 6651

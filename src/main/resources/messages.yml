@@ -1,0 +1,109 @@
+# ============================================================
+#  PrisonCore - messages
+#  Colour codes: &a, &l ... and hex colours like &#FFAA00.
+#  %prefix% is replaced with the prefix below. Set a message to "" to turn it off.
+# ============================================================
+
+prefix: "&8[&6Prison&8] &r"
+
+# ---- General
+players-only: "%prefix%&cOnly players can use this command."
+player-not-found: "%prefix%&cPlayer &f%player% &chas never joined this server."
+invalid-number: "%prefix%&f%input% &cis not a valid number."
+
+# ---- Ranks
+rankup-success: "%prefix%&aYou ranked up to %rank_prefix% &afor &6%cost%&a!"
+rankup-not-enough: "%prefix%&cYou need &6%needed% &cmore to rank up to %rank_prefix% &7(costs &6%cost%&7)&c."
+rankup-max-rank: "%prefix%&eYou are at the highest rank! Use &6/prestige &eto prestige."
+rankup-max-success: "%prefix%&aYou ranked up &f%count% &atime(s) to %rank_prefix% &afor &6%cost%&a."
+rankup-broadcast: "%prefix%&f%player% &7ranked up to %rank_prefix%&7."
+rankup-final-broadcast: "%prefix%&f%player% &7reached the final rank %rank_prefix%&7!"
+ranks-header: "%prefix%&6Ranks &7(prices at prestige %prestige%)"
+ranks-line: " %rank_prefix% &7- &f%cost%"
+ranks-line-current: " %rank_prefix% &7- &f%cost% &a< you are here"
+
+# ---- Prestige
+prestige-disabled: "%prefix%&cPrestiging is turned off on this server."
+prestige-not-max-rank: "%prefix%&cYou must reach rank %rank_prefix% &cbefore you can prestige."
+prestige-not-enough: "%prefix%&cPrestiging costs &6%cost%&c. You need &6%needed% &cmore."
+prestige-max: "%prefix%&eYou have reached the highest prestige. Congratulations!"
+prestige-success: "%prefix%&d&lPRESTIGE! &7You are now &dPrestige %prestige% &7and back at rank %rank_prefix%&7."
+prestige-max-success: "%prefix%&aYou prestiged &f%count% &atime(s). You are now &dPrestige %prestige% &aat rank %rank_prefix%&a."
+prestige-broadcast: "%prefix%&f%player% &7is now &dPrestige %prestige%&7!"
+prestige-reward: "%prefix%&6&lPRIZE! &ePrestige %prestige% reward: &f%reward%"
+prestiges-header: "%prefix%&6Prestige prizes &7(you are prestige &d%prestige%&7, next prestige costs &6%cost%&7) &8[%page%/%pages%]"
+prestiges-line: " &c✘ &7Prestige &d%prestige% &7- &f%reward%"
+prestiges-line-done: " &a✔ &7Prestige &d%prestige% &7- &f%reward%"
+prestiges-line-repeating: " &b↻ &7Every &d%prestige% &7prestiges - &f%reward%"
+prestiges-empty: " &7No prizes have been set up yet."
+prestigetop-header: "%prefix%&6Top prestiges &8[%page%/%pages%]"
+prestigetop-line: " &e#%position% &f%player% &7- &dPrestige %prestige% &7(rank %rank%)"
+
+# ---- Mines
+mine-teleport: "%prefix%&aWelcome to mine &f%mine%&a."
+mine-not-found: "%prefix%&cThere is no mine called &f%mine%&c."
+mine-no-access: "%prefix%&cYou can't use mine &f%mine% &cyet. You need: &f%requirement%"
+mine-resetting: "%prefix%&eMine &f%mine% &eis resetting, one moment..."
+mine-reset: "%prefix%&eMine &f%mine% &ehas been reset!"
+no-mines: "%prefix%&cThere are no mines you can use yet."
+inventory-full: "%prefix%&c&lYour inventory is full! &7Use &f/sellall&7."
+build-denied: "%prefix%&cYou can't build here."
+
+# ---- Selling
+sell-nothing: "%prefix%&cYou have nothing to sell."
+sell-success: "%prefix%&aSold &f%items% &aitems for &6%total% &7(%multiplier%x multiplier)"
+autosell-on: "%prefix%&aAutosell is now &lON&a. Blocks you mine are sold instantly."
+autosell-off: "%prefix%&cAutosell is now &lOFF&c."
+# Shown above the hotbar while mining with autosell on.
+autosell-earned: "&a+%total% &7(%multiplier%x)"
+multiplier-info:
+  - "%prefix%&6Your sell multiplier: &b%total%x"
+  - " &7Base: &f1x"
+  - " &7Prestige bonus: &f+%prestige%x"
+  - " &7Reward bonus: &f+%bonus%x"
+  - " &7Rank/donor bonus: &f+%permission%x"
+  - " &7Server boost: &fx%global%"
+
+# ---- Money
+balance-self: "%prefix%&7Balance: &a%balance% &8(%balance_full%)"
+balance-other: "%prefix%&f%player%&7's balance: &a%balance% &8(%balance_full%)"
+pay-usage: "%prefix%&cUsage: /pay <player> <amount>"
+pay-self: "%prefix%&cYou can't pay yourself."
+pay-minimum: "%prefix%&cYou must send at least &6%amount%&c."
+pay-not-enough: "%prefix%&cYou don't have that much money."
+pay-sent: "%prefix%&aYou sent &6%amount% &ato &f%player%&a."
+pay-received: "%prefix%&aYou received &6%amount% &afrom &f%player%&a."
+baltop-header: "%prefix%&6Richest players &8[%page%/%pages%]"
+baltop-line: " &e#%position% &f%player% &7- &a%balance%"
+baltop-external: "%prefix%&cMoney is handled by another plugin on this server. Use its leaderboard command."
+top-empty: " &7Nobody is on this list yet."
+
+# ---- Scoreboard
+scoreboard-on: "%prefix%&aScoreboard shown."
+scoreboard-off: "%prefix%&cScoreboard hidden. Use &f/sb &cto bring it back."
+scoreboard-disabled: "%prefix%&cThe scoreboard is turned off on this server."
+
+# ---- Words used inside placeholders
+placeholder-prestige: "Prestige"
+placeholder-max: "MAX"
+placeholder-no-mine: "None"
+
+# ---- Menus (/ranks and /mines)
+menu-ranks-title: "&8Ranks"
+menu-rank-completed: "&a✔ Completed"
+menu-rank-current: "&e★ Your current rank"
+menu-rank-cost: "&7Cost: &6%cost%"
+menu-rank-click: "&aClick to rank up!"
+menu-rank-locked: "&cRank up one step at a time."
+menu-info-title: "&6Your progress"
+menu-info-rank: "&7Rank: %rank_prefix%"
+menu-info-prestige: "&7Prestige: &d%prestige%"
+menu-info-balance: "&7Balance: &a%balance%"
+menu-mines-title: "&8Mines"
+menu-mine-requirement: "&7Needs: &f%requirement%"
+menu-mine-block: " &8- &f%block% &7%percent%%"
+menu-mine-remaining: "&7Blocks left: &f%percent%%"
+menu-mine-click: "&aClick to teleport!"
+menu-mine-locked: "&cLocked"
+menu-previous: "&ePrevious page"
+menu-next: "&eNext page"

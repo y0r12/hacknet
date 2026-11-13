@@ -1,0 +1,106 @@
+# ============================================================
+#  PrisonCore - ranks
+#  Players start at the first rank and buy their way down the list with /rankup.
+#  The order of this list is the order of the ladder.
+#
+#  cost         price to rank up INTO this rank at prestige 0 (the first rank is free).
+#               Prestige makes every rank more expensive - see prestige.yml.
+#  prefix       tag shown in chat, menus and on the scoreboard.
+#  permissions  (optional) extra permissions a player has from this rank onwards,
+#               for example ["essentials.warps.vipmine", "essentials.kits.miner"].
+#  commands     (optional) console commands run when a player reaches this rank,
+#               for example ["give %player% diamond 5"]. %player% and %rank% are replaced.
+#
+#  Players automatically get prisoncore.rank.<rank> for their rank and every rank below it,
+#  and prisoncore.mine.<mine> for every mine their rank unlocks.
+#
+#  Quick ways to change prices in-game:
+#    /prison rank setcost <rank> <cost>
+#    /prison rank autocost <firstCost> <multiplier>   (re-prices the whole ladder)
+# ============================================================
+
+settings:
+  # Announce every rank-up to the whole server.
+  broadcast-rankup: false
+  # Announce when a player reaches the final rank.
+  broadcast-final-rank: true
+
+ranks:
+  "A":
+    cost: 0
+    prefix: "&7[&fA&7]"
+  "B":
+    cost: 2500
+    prefix: "&7[&fB&7]"
+  "C":
+    cost: 3800
+    prefix: "&7[&fC&7]"
+  "D":
+    cost: 5600
+    prefix: "&7[&fD&7]"
+  "E":
+    cost: 8400
+    prefix: "&7[&fE&7]"
+  "F":
+    cost: 13000
+    prefix: "&7[&aF&7]"
+  "G":
+    cost: 19000
+    prefix: "&7[&aG&7]"
+  "H":
+    cost: 28000
+    prefix: "&7[&aH&7]"
+  "I":
+    cost: 43000
+    prefix: "&7[&aI&7]"
+  "J":
+    cost: 64000
+    prefix: "&7[&aJ&7]"
+  "K":
+    cost: 96000
+    prefix: "&7[&bK&7]"
+  "L":
+    cost: 140000
+    prefix: "&7[&bL&7]"
+  "M":
+    cost: 220000
+    prefix: "&7[&bM&7]"
+  "N":
+    cost: 320000
+    prefix: "&7[&bN&7]"
+  "O":
+    cost: 490000
+    prefix: "&7[&bO&7]"
+  "P":
+    cost: 730000
+    prefix: "&7[&dP&7]"
+  "Q":
+    cost: 1100000
+    prefix: "&7[&dQ&7]"
+  "R":
+    cost: 1600000
+    prefix: "&7[&dR&7]"
+  "S":
+    cost: 2500000
+    prefix: "&7[&dS&7]"
+  "T":
+    cost: 3700000
+    prefix: "&7[&dT&7]"
+  "U":
+    cost: 5500000
+    prefix: "&7[&6U&7]"
+  "V":
+    cost: 8300000
+    prefix: "&7[&6V&7]"
+  "W":
+    cost: 12000000
+    prefix: "&7[&6W&7]"
+  "X":
+    cost: 19000000
+    prefix: "&7[&6X&7]"
+  "Y":
+    cost: 28000000
+    prefix: "&7[&6Y&7]"
+  "Z":
+    cost: 42000000
+    prefix: "&7[&c&lZ&7]"

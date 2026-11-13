@@ -1,0 +1,136 @@
+# ============================================================
+#  PrisonCore - main settings
+#  After editing any file, run /prison reload in-game.
+#  Other files: ranks.yml, prestige.yml, prices.yml, messages.yml
+#  Mines are created in-game (see /prison setup) and saved to mines.yml.
+# ============================================================
+
+economy:
+  # internal = PrisonCore keeps the balances itself (and shares them with other plugins if Vault is installed).
+  # vault    = use another economy plugin you already have (for example EssentialsX) through Vault.
+  provider: internal
+  # Money new players start with.
+  starting-balance: 0
+  currency-symbol: "$"
+  # Smallest amount allowed in /pay.
+  minimum-pay: 1
+
+storage:
+  # How often changed player data is written to players.db.
+  autosave-seconds: 60
+
+# What new players receive the first time they join.
+first-join:
+  # Format: MATERIAL [amount] [enchantment:level ...] [unbreakable]
+  items:
+    - "DIAMOND_PICKAXE efficiency:3 unbreaking:3"
+  # Console commands. %player% is replaced with the player's name.
+  commands: []
+
+mines:
+  # Timed reset, in seconds. A mine only resets if someone has mined in it. 0 = no timer.
+  default-reset-interval: 600
+  # Also reset as soon as this percentage of the mine has been mined. 0 = off.
+  default-reset-threshold: 70
+  # Refill every mine shortly after the server starts.
+  reset-on-startup: true
+  # Big mines refill over several ticks. This is how many milliseconds each tick may spend on it.
+  reset-ms-per-tick: 15
+  # Largest mine an admin can create, in blocks.
+  max-volume: 2000000
+  # Mined blocks go straight into the player's inventory.
+  auto-pickup: true
+  # Raw iron, gold and copper are turned into ingots as they are picked up.
+  auto-smelt: true
+  # Fortune normally only works on ores. Turn this on to make it work on every block in a mine.
+  fortune-all-blocks: true
+
+  # Blocks for a new mine whose name is not a rank.
+  default-blocks:
+    STONE: 100
+
+  # When you create a mine named after a rank (/prison mine create A) it starts with this block mix.
+  # The numbers are weights: 60/30/10 means 60%, 30% and 10%.
+  # Change a mine later with /prison mine addblock, removeblock or preset.
+  presets:
+    A: {STONE: 60, ANDESITE: 30, COAL_ORE: 10}
+    B: {ANDESITE: 60, COAL_ORE: 30, IRON_ORE: 10}
+    C: {COAL_ORE: 60, IRON_ORE: 30, GOLD_ORE: 10}
+    D: {IRON_ORE: 60, GOLD_ORE: 30, COPPER_ORE: 10}
+    E: {GOLD_ORE: 60, COPPER_ORE: 30, REDSTONE_ORE: 10}
+    F: {COPPER_ORE: 60, REDSTONE_ORE: 30, LAPIS_ORE: 10}
+    G: {REDSTONE_ORE: 60, LAPIS_ORE: 30, LAPIS_BLOCK: 10}
+    H: {LAPIS_ORE: 60, LAPIS_BLOCK: 30, REDSTONE_BLOCK: 10}
+    I: {LAPIS_BLOCK: 60, REDSTONE_BLOCK: 30, COAL_BLOCK: 10}
+    J: {REDSTONE_BLOCK: 60, COAL_BLOCK: 30, IRON_BLOCK: 10}
+    K: {COAL_BLOCK: 60, IRON_BLOCK: 30, GOLD_BLOCK: 10}
+    L: {IRON_BLOCK: 60, GOLD_BLOCK: 30, PRISMARINE: 10}
+    M: {GOLD_BLOCK: 60, PRISMARINE: 30, DARK_PRISMARINE: 10}
+    "N": {PRISMARINE: 60, DARK_PRISMARINE: 30, CALCITE: 10}
+    O: {DARK_PRISMARINE: 60, CALCITE: 30, AMETHYST_BLOCK: 10}
+    P: {CALCITE: 60, AMETHYST_BLOCK: 30, BLACKSTONE: 10}
+    Q: {AMETHYST_BLOCK: 60, BLACKSTONE: 30, DIAMOND_ORE: 10}
+    R: {BLACKSTONE: 60, DIAMOND_ORE: 30, EMERALD_ORE: 10}
+    S: {DIAMOND_ORE: 60, EMERALD_ORE: 30, NETHER_QUARTZ_ORE: 10}
+    T: {EMERALD_ORE: 60, NETHER_QUARTZ_ORE: 30, NETHER_BRICKS: 10}
+    U: {NETHER_QUARTZ_ORE: 60, NETHER_BRICKS: 30, RED_NETHER_BRICKS: 10}
+    V: {NETHER_BRICKS: 60, RED_NETHER_BRICKS: 30, END_STONE: 10}
+    W: {RED_NETHER_BRICKS: 60, END_STONE: 30, PURPUR_BLOCK: 10}
+    X: {END_STONE: 60, PURPUR_BLOCK: 30, QUARTZ_BLOCK: 10}
+    "Y": {PURPUR_BLOCK: 60, QUARTZ_BLOCK: 30, DIAMOND_BLOCK: 10}
+    Z: {QUARTZ_BLOCK: 60, DIAMOND_BLOCK: 30, EMERALD_BLOCK: 10}
+
+sell:
+  # Every prestige adds this much to a player's sell multiplier (0.05 = +5% per prestige).
+  # Together with rank-cost.increase-per-prestige in prestige.yml this sets how hard prestiging gets:
+  # in the long run each prestige takes (rank cost increase / this value) times as long as the first.
+  # With the defaults that is 0.10 / 0.05 = 2x, so players can keep prestiging forever.
+  multiplier-per-prestige: 0.05
+  # Highest bonus prestige alone can give. 0 = no limit.
+  max-prestige-multiplier: 0
+  # Multiplies everyone's sales. Set to 2.0 for a double-money weekend.
+  global-multiplier: 1.0
+
+scoreboard:
+  enabled: true
+  # How often the board refreshes. 20 ticks = 1 second.
+  update-ticks: 20
+  title: "&6&lPRISON"
+  # Up to 15 lines. Placeholders:
+  #   %player% %rank% %rank_prefix% %next_rank% %prestige% %prestige_prefix% %prestige_cost%
+  #   %balance% %balance_full% %rankup_cost% %rankup_needed% %rankup_progress% %rankup_bar%
+  #   %multiplier% %blocks_mined% %autosell% %mine% %mine_remaining% %mine_reset%
+  #   %next_milestone% %online% %max_players%
+  # PlaceholderAPI placeholders also work here if that plugin is installed.
+  lines:
+    - "&7&m------------------"
+    - "&e&l%player%"
+    - " &7Rank: %rank_prefix%"
+    - " &7Prestige: &d%prestige%"
+    - " &7Balance: &a%balance%"
+    - " &7Multiplier: &b%multiplier%x"
+    - ""
+    - "&e&lNext: &f%next_rank%"
+    - " &7Cost: &a%rankup_cost%"
+    - " %rankup_bar% &7%rankup_progress%%"
+    - ""
+    - "&e&lMine: &f%mine%"
+    - " &7Blocks left: &f%mine_remaining%"
+    - " &7Reset in: &f%mine_reset%"
+    - "&7&m------------------"
+  progress-bar:
+    length: 10
+    symbol: "|"
+    done-color: "&a"
+    todo-color: "&8"
+
+chat:
+  # Put the prestige and rank in front of chat messages. Turn off if another plugin formats chat.
+  enabled: true
+  format: "%prestige_prefix%%rank_prefix% &f%player%&7: &f%message%"
+
+protection:
+  # Worlds where players can only break blocks inside mines (and cannot place blocks at all).
+  # Players with prisoncore.build are not affected. Use ["*"] for every world.
+  # Leave empty if you protect your world with another plugin such as WorldGuard.
+  worlds: []

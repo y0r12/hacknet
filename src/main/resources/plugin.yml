@@ -1,0 +1,170 @@
+name: PrisonCore
+version: '${project.version}'
+main: dev.prisoncore.PrisonCore
+api-version: '1.21'
+description: All-in-one prison plugin - mines, ranks A-Z, infinite prestige, economy, selling, scoreboard and permissions.
+softdepend: [Vault, PlaceholderAPI, Essentials, CMI]
+
+commands:
+  prison:
+    description: Admin tools - set up mines, ranks, prices and manage players.
+    usage: /<command> help
+    aliases: [prisoncore, pc]
+    permission: prisoncore.admin
+  rankup:
+    description: Rank up to the next rank.
+    aliases: [ru]
+    permission: prisoncore.rankup
+  rankupmax:
+    description: Rank up as many times as you can afford.
+    aliases: [maxrankup, rumax]
+    permission: prisoncore.rankupmax
+  ranks:
+    description: View every rank and its price.
+    permission: prisoncore.ranks
+  prestige:
+    description: Prestige once you reach the final rank.
+    permission: prisoncore.prestige
+  prestigemax:
+    description: Rank up and prestige as many times as you can afford.
+    aliases: [maxprestige, pmax]
+    permission: prisoncore.prestigemax
+  prestiges:
+    description: View the prestige milestone prizes.
+    aliases: [milestones, prestigerewards]
+    permission: prisoncore.prestiges
+  prestigetop:
+    description: Prestige leaderboard.
+    aliases: [ptop]
+    permission: prisoncore.prestigetop
+  mine:
+    description: Teleport to your best mine, or to a mine by name.
+    usage: /<command> [name]
+    permission: prisoncore.mines.teleport
+  mines:
+    description: Open the mine menu.
+    permission: prisoncore.mines.menu
+  sellall:
+    description: Sell everything in your inventory.
+    aliases: [sell]
+    permission: prisoncore.sellall
+  autosell:
+    description: Toggle selling blocks automatically as you mine.
+    permission: prisoncore.autosell
+  multiplier:
+    description: Show your sell multiplier.
+    aliases: [multi, multipliers]
+    permission: prisoncore.multiplier
+  sb:
+    description: Toggle the scoreboard.
+    aliases: [togglescoreboard, togglesb]
+    permission: prisoncore.scoreboard
+  balance:
+    description: Check your balance.
+    usage: /<command> [player]
+    aliases: [bal, money]
+    permission: prisoncore.balance
+  pay:
+    description: Send money to another player.
+    usage: /<command> <player> <amount>
+    permission: prisoncore.pay
+  baltop:
+    description: Richest players.
+    aliases: [balancetop, moneytop]
+    permission: prisoncore.baltop
+  eco:
+    description: Give, take or set a player's money.
+    usage: /<command> <give|take|set> <player> <amount>
+    aliases: [economy]
+    permission: prisoncore.eco
+
+permissions:
+  prisoncore.admin:
+    description: Full access - /prison, /eco, building in mines and every mine.
+    default: op
+    children:
+      prisoncore.player: true
+      prisoncore.eco: true
+      prisoncore.build: true
+      prisoncore.mine.*: true
+      prisoncore.autosell: true
+  prisoncore.player:
+    description: Everything a normal player needs. Given to everyone by default.
+    default: true
+    children:
+      prisoncore.rankup: true
+      prisoncore.rankupmax: true
+      prisoncore.ranks: true
+      prisoncore.prestige: true
+      prisoncore.prestigemax: true
+      prisoncore.prestiges: true
+      prisoncore.prestigetop: true
+      prisoncore.mines.teleport: true
+      prisoncore.mines.menu: true
+      prisoncore.sellall: true
+      prisoncore.multiplier: true
+      prisoncore.scoreboard: true
+      prisoncore.balance: true
+      prisoncore.balance.others: true
+      prisoncore.pay: true
+      prisoncore.baltop: true
+  prisoncore.rankup:
+    description: Use /rankup.
+    default: true
+  prisoncore.rankupmax:
+    description: Use /rankupmax.
+    default: true
+  prisoncore.ranks:
+    description: Use /ranks.
+    default: true
+  prisoncore.prestige:
+    description: Use /prestige.
+    default: true
+  prisoncore.prestigemax:
+    description: Use /prestigemax.
+    default: true
+  prisoncore.prestiges:
+    description: Use /prestiges.
+    default: true
+  prisoncore.prestigetop:
+    description: Use /prestigetop.
+    default: true
+  prisoncore.mines.teleport:
+    description: Use /mine to teleport to mines you have unlocked.
+    default: true
+  prisoncore.mines.menu:
+    description: Use /mines.
+    default: true
+  prisoncore.sellall:
+    description: Use /sellall.
+    default: true
+  prisoncore.multiplier:
+    description: Use /multiplier.
+    default: true
+  prisoncore.scoreboard:
+    description: Use /sb to toggle the scoreboard.
+    default: true
+  prisoncore.balance:
+    description: Use /balance.
+    default: true
+  prisoncore.balance.others:
+    description: Check another player's balance.
+    default: true
+  prisoncore.pay:
+    description: Use /pay.
+    default: true
+  prisoncore.baltop:
+    description: Use /baltop.
+    default: true
+  prisoncore.autosell:
+    description: Use /autosell. A perk - give it to donors, or unlock it with a rank or prestige milestone.
+    default: op
+  prisoncore.eco:
+    description: Use /eco.
+    default: op
+  prisoncore.build:
+    description: Place blocks inside mines and build in protected worlds.
+    default: op
+  prisoncore.mine.*:
+    description: Use every mine regardless of rank. Individual mines are prisoncore.mine.<name>.
+    default: op

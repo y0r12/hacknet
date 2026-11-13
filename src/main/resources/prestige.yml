@@ -1,0 +1,115 @@
+# ============================================================
+#  PrisonCore - prestige
+#  At the final rank a player can /prestige: they go back to the first rank
+#  with a higher prestige number, and can do it again and again.
+# ============================================================
+
+enabled: true
+
+# Highest prestige a player can reach. 0 = no limit (prestige forever).
+max-prestige: 0
+
+# The fee to prestige, paid on top of having reached the final rank.
+cost:
+  base: 50000000
+  # The fee grows by this share of the base every prestige. 0.10 = +10% per prestige,
+  # so prestige 10 -> 11 costs twice the base. Set to 0 for a flat fee.
+  increase-per-prestige: 0.10
+
+# How much more expensive rank-ups get as players prestige.
+rank-cost:
+  # LINEAR      = each prestige adds the same amount: price = base x (1 + prestige x increase)
+  #               Prices keep rising gently, so prestiging never becomes impossible. Recommended.
+  # EXPONENTIAL = each prestige multiplies the price: price = base x (1 + increase) ^ prestige
+  #               Gets extremely expensive very quickly - only use it together with max-prestige.
+  mode: LINEAR
+  # 0.10 = rank-ups cost 10% more per prestige (prestige 10 = 2x, prestige 100 = 11x).
+  increase-per-prestige: 0.10
+  # Rank-ups never cost more than this many times the base price. 0 = no limit.
+  max-multiplier: 0
+
+# Take away the player's money when they prestige (milestone money is given afterwards).
+reset-balance: true
+
+# Tag shown before the rank in chat and on the scoreboard. Not shown at prestige 0.
+prefix: "&8[&dP%prestige%&8] "
+
+# Announce every single prestige to the whole server. Milestones below have their own announcements.
+broadcast-every-prestige: false
+
+# /prestigemax stops after this many prestiges in one go.
+max-per-command: 1000
+
+# ------------------------------------------------------------
+#  Milestone prizes - given once, the moment a player reaches that prestige.
+#  Add, remove or change as many as you like; the number is the prestige.
+#
+#  money        added to the player's balance
+#  multiplier   permanent sell bonus (0.25 = +0.25x on top of what they already have)
+#  permissions  permissions the player keeps from this prestige onwards
+#  commands     console commands, e.g. crate keys or items. %player% and %prestige% are replaced.
+#  broadcast    announcement to the whole server (optional)
+#  message      private message to the player (optional - a default one is used if missing)
+#  description  what /prestiges shows for this prize (optional - worked out automatically if missing)
+#
+#  In broadcast and message you can use %player%, %prestige% and %reward%.
+# ------------------------------------------------------------
+milestones:
+  1:
+    money: 50000
+    multiplier: 0.10
+    broadcast: "&d&l%player% &7has prestiged for the first time!"
+  10:
+    money: 500000
+    multiplier: 0.25
+    permissions:
+      - "prisoncore.autosell"
+    description: "$500K, +0.25x sell multiplier and /autosell"
+    broadcast: "&d&l%player% &7reached &dPrestige 10 &7and unlocked &f/autosell&7!"
+  50:
+    money: 5000000
+    multiplier: 0.50
+    commands:
+      - "give %player% diamond_block 16"
+    description: "$5M, +0.5x sell multiplier and 16 diamond blocks"
+    broadcast: "&d&l%player% &7reached &dPrestige 50&7!"
+  100:
+    money: 25000000
+    multiplier: 1.0
+    broadcast: "&d&l%player% &7reached &dPrestige 100&7!"
+  500:
+    money: 250000000
+    multiplier: 2.5
+    commands:
+      - "give %player% netherite_ingot 4"
+    description: "$250M, +2.5x sell multiplier and 4 netherite ingots"
+    broadcast: "&d&l%player% &7reached &dPrestige 500&7!"
+  1000:
+    money: 1000000000
+    multiplier: 5.0
+    broadcast: "&6&l%player% &ehas reached &6&lPrestige 1,000&e!"
+  5000:
+    money: 10000000000
+    multiplier: 10.0
+    broadcast: "&6&l%player% &ehas reached &6&lPrestige 5,000&e!"
+  10000:
+    money: 50000000000
+    multiplier: 25.0
+    broadcast: "&c&l%player% &6has reached &c&lPrestige 10,000&6! Incredible!"
+  50000:
+    money: 500000000000
+    multiplier: 50.0
+    broadcast: "&c&l%player% &6has reached &c&lPrestige 50,000&6!"
+  100000:
+    money: 5000000000000
+    multiplier: 100.0
+    broadcast: "&4&l%player% &chas reached &4&lPrestige 100,000&c! A true legend."
+
+# ------------------------------------------------------------
+#  Repeating prizes - given every N prestiges, forever.
+#  Same options as milestones. The number is "every this many prestiges".
+# ------------------------------------------------------------
+repeating:
+  25:
+    multiplier: 0.05
+    description: "+0.05x sell multiplier"
