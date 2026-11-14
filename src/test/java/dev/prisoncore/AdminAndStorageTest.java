@@ -44,6 +44,37 @@ class AdminAndStorageTest extends PrisonTestBase {
     }
 
     @Test
+    void setupWarnsAboutMinesInsideSpawnProtection() {
+        PlayerMock admin = admin("Admin");
+        int spawnX = world.getSpawnLocation().getBlockX();
+        int spawnZ = world.getSpawnLocation().getBlockZ();
+        server.setSpawnRadius(16);
+
+        admin.teleport(new org.bukkit.Location(world, spawnX + 3.5, 60, spawnZ + 3.5));
+        admin.performCommand("prison mine pos1");
+        admin.teleport(new org.bukkit.Location(world, spawnX + 5.5, 62, spawnZ + 5.5));
+        admin.performCommand("prison mine pos2");
+        admin.teleport(new org.bukkit.Location(world, spawnX + 3.5, 63, spawnZ + 3.5));
+        admin.performCommand("prison mine create A");
+        tick(5);
+        assertTrue(allMessages(admin).contains("inside the server's protected spawn area"),
+                "creating a mine next to spawn should warn straight away");
+        createMine(admin, "B", spawnX + 300, 60, spawnZ + 300, spawnX + 302, 62, spawnZ + 302);
+
+        assertTrue(plugin.mines().insideSpawnProtection(plugin.mines().get("A")));
+        assertFalse(plugin.mines().insideSpawnProtection(plugin.mines().get("B")));
+        admin.performCommand("prison setup");
+        String warned = allMessages(admin);
+        assertTrue(warned.contains("Spawn protection: A is inside"), warned);
+        assertTrue(warned.contains("spawn-protection=0"), warned);
+
+        server.setSpawnRadius(0);
+        assertFalse(plugin.mines().insideSpawnProtection(plugin.mines().get("A")));
+        admin.performCommand("prison setup");
+        assertFalse(allMessages(admin).contains("Spawn protection"));
+    }
+
+    @Test
     void helpListsCommandsAcrossPages() {
         PlayerMock admin = admin("Admin");
         admin.performCommand("prison");
@@ -120,6 +151,8 @@ class AdminAndStorageTest extends PrisonTestBase {
         assertEquals(42, data(player).prestige());
         assertTrue(player.hasPermission("prisoncore.autosell"), "prestige 10+ unlocks autosell");
 
+        player.performCommand("autosell");
+        assertTrue(data(player).autosell());
         admin.performCommand("prison player setmultiplier Steve 2");
         admin.performCommand("prison player addmultiplier Steve 0.5");
         assertEquals(2.5, data(player).bonusMultiplier(), 1e-9);
@@ -136,6 +169,7 @@ class AdminAndStorageTest extends PrisonTestBase {
         assertEquals(0, data(player).bonusMultiplier());
         assertEquals(0, balance(player));
         assertFalse(player.hasPermission("prisoncore.rank.m"));
+        assertFalse(data(player).autosell(), "a reset also switches autosell off");
 
         admin.performCommand("prison player setrank Ghost B");
         assertTrue(allMessages(admin).contains("never joined"));

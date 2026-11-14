@@ -220,6 +220,29 @@ public final class MineManager {
         return null;
     }
 
+    /**
+     * True when the server's own spawn protection (spawn-protection in server.properties) covers part of this
+     * mine. Minecraft then refuses block breaking there for everyone except operators, before any plugin is asked.
+     */
+    public boolean insideSpawnProtection(Mine mine) {
+        try {
+            int radius = Bukkit.getSpawnRadius();
+            // Spawn protection only exists in the main world, and only once the server has an operator.
+            if (radius <= 0 || Bukkit.getWorlds().isEmpty() || Bukkit.getOperators().isEmpty()) {
+                return false;
+            }
+            World main = Bukkit.getWorlds().get(0);
+            if (!main.getName().equals(mine.world())) {
+                return false;
+            }
+            Location spawn = main.getSpawnLocation();
+            return mine.minX() <= spawn.getBlockX() + radius && mine.maxX() >= spawn.getBlockX() - radius
+                    && mine.minZ() <= spawn.getBlockZ() + radius && mine.maxZ() >= spawn.getBlockZ() - radius;
+        } catch (Throwable unsupported) {
+            return false;
+        }
+    }
+
     public int interval(Mine mine) {
         return mine.resetInterval() >= 0 ? mine.resetInterval()
                 : plugin.getConfig().getInt("mines.default-reset-interval", 600);

@@ -15,6 +15,7 @@ Works out of the box: drop it in, create your mines, done.
 ## Requirements
 
 - **Paper 1.21 or newer** (Purpur and other Paper forks are fine), running Java 21+.
+  Played through end to end on a live Paper 1.21.11 server, with and without Vault and PlaceholderAPI.
 - Optional: [Vault](https://www.spigotmc.org/resources/vault.34315/) so other plugins (shops, crates…) can use PrisonCore's money.
 - Optional: [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) to show ranks and prestige in other plugins.
 
@@ -212,6 +213,11 @@ Add your own under `milestones:` (one-off) or `repeating:` (every N prestiges). 
 
 The 26 default block mixes are under `mines.presets` in `config.yml` and step up from stone and coal in A to
 quartz, diamond and emerald blocks in Z.
+
+> **Mines near spawn:** Minecraft's own `spawn-protection` setting (16 blocks by default, in
+> `server.properties`) stops everyone except operators breaking blocks around the world spawn, and no plugin
+> can override it. If your mines are close to spawn, set `spawn-protection=0` and restart. `/prison setup`
+> warns you when a mine is affected.
 
 ## Selling and multipliers
 

@@ -161,6 +161,18 @@ public final class AdminCommand implements TabExecutor {
         sender.sendMessage(Text.color(check(true) + "Scoreboard: &f"
                 + (plugin.sidebar().enabled() ? "enabled" : "disabled") + " &7| PlaceholderAPI: &f"
                 + (plugin.papiPresent() ? "hooked" : "not installed (optional)")));
+        List<String> protectedMines = new ArrayList<>();
+        for (Mine mine : plugin.mines().all()) {
+            if (plugin.mines().insideSpawnProtection(mine)) {
+                protectedMines.add(mine.name());
+            }
+        }
+        if (!protectedMines.isEmpty()) {
+            sender.sendMessage(Text.color(check(false) + "Spawn protection: &f" + shorten(protectedMines)
+                    + " &7" + (protectedMines.size() == 1 ? "is" : "are") + " inside the server's protected spawn "
+                    + "area, so only operators can mine there. &eSet &fspawn-protection=0 &ein server.properties "
+                    + "and restart, or move the mine."));
+        }
         if (!missing.isEmpty()) {
             sender.sendMessage(Text.color("&eTo make a mine: &f/prison wand&e, click the two corners, stand where "
                     + "players should arrive, then &f/prison mine create " + missing.get(0)));
@@ -280,6 +292,11 @@ public final class AdminCommand implements TabExecutor {
                 } else {
                     tell(sender, "&eThis mine is not linked to a rank. Open it up with &f/prison mine setrank "
                             + mine.name() + " <rank> &eor give players the permission &f" + mine.permission() + "&e.");
+                }
+                if (plugin.mines().insideSpawnProtection(mine)) {
+                    tell(sender, "&cHeads up: this mine is inside the server's protected spawn area, so only "
+                            + "operators can break blocks here. Set &fspawn-protection=0 &cin server.properties and "
+                            + "restart, or build the mine further from spawn.");
                 }
                 return;
             }
@@ -670,6 +687,7 @@ public final class AdminCommand implements TabExecutor {
                 data.prestige(0);
                 data.bonusMultiplier(0);
                 data.blocksMined(0);
+                data.autosell(false);
                 plugin.economy().set(data.uuid(), plugin.getConfig().getDouble("economy.starting-balance", 0));
                 tell(sender, "&a" + data.name() + " has been reset to the first rank, prestige 0 and the starting "
                         + "balance.");
